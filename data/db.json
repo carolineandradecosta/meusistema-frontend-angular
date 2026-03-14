@@ -1,0 +1,40 @@
+{
+  "clientes": [
+    {
+      "id": 1,
+      "nome": "Caroline Andrade",
+      "cpf": "12345647987",
+      "email": "carol@gmail.com",
+      "telefone": "83988774455",
+      "endereco": {
+        "cep": "58430460",
+        "logradouro": "Rua Antônio Vieira da Rocha",
+        "numero": "336",
+        "complemento": "casa",
+        "bairro": "Bodocongó",
+        "cidade": "Campina Grande",
+        "estado": "PB",
+        "pais": "Brasil"
+      }
+    },
+    {
+      "id": 2,
+      "nome": "Caroline Costa",
+      "cpf": "78456415645",
+      "email": "carol@gmail.com",
+      "telefone": "83945645789",
+      "endereco": {
+        "cep": "58430460",
+        "logradouro": "Rua Antônio Vieira da Rocha",
+        "numero": "336",
+        "complemento": "casa",
+        "bairro": "Bodocongó",
+        "cidade": "Campina Grande",
+        "estado": "PB",
+        "pais": "Brasil"
+      }
+    }
+  ],
+  "fornecedores": [],
+  "produtos": []
+}
