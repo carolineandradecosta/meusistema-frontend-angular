@@ -1,1 +1,61 @@
-<p>listagem-cliente works!</p>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="d-flex align-items-center mb-0">
+      Lista de Clientes
+      <span class="ms-2"
+            style="cursor: pointer;"
+            data-bs-toggle="tooltip"
+            data-bs-placement="right"
+            title="Visualize, edite ou exclua Clientes">
+        <i class="bi bi-question-circle-fill">
+        </i>
+      </span>
+    </h2>
+  </div>
+
+  <div class="mb-3">
+    <button class="btn btn-primary" (click)="novoCliente()">
+      <i class="bi bi-plus-lg"></i> Adicionar Cliente
+    </button>
+  </div>
+
+  <div class="table-responsive shadow-sm rounded">
+    <table class="table table-hover align-middle mb-0">
+      <thead>
+        <tr>
+          <th scope="col" class="ps-3">ID</th>
+          <th scope="col">Nome</th>
+          <th scope="col">CPF</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Telefone</th>
+          <th scope="col" class="text-center pe-3">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clientes">
+          <td class="ps-3 fw-bold">{{ cliente.id }}</td>
+          <td>{{ cliente.nome }}</td>
+          <td>{{ cliente.cpf }}</td>
+          <td>{{ cliente.email }}</td>
+          <td>{{ cliente.telefone}}</td>
+          <td class="text-center pe-3">
+            <button class="btn btn-warning btn-sm me-2" (click)="editarCliente(cliente.id!)" title="Editar">
+              <i class="bi bi-pencil"></i>
+              Editar
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="deletar(cliente.id!)" title="Excluir">
+              <i class="bi bi-trash"></i>
+              Excluir
+            </button>
+          </td>
+        </tr>
+
+        <tr *ngIf="clientes.length === 0">
+          <td colspan="6" class="text-center py-4 text-muted">
+            <i class="bi bi-exclamation-circle me-1"></i> Nenhum cliente encontrado.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
