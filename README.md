@@ -109,3 +109,70 @@ ng generate service X
 Gerar Build
 ```
 ng build
+```
+
+
+---
+
+## Funcionalidades Implementadas
+
+### 1. Registro de Usuário (`CadastrarUsuarioComponent`)
+
+- Formulário com campos:
+  - **username**
+  - **email**
+  - **password**
+  - **role** (User ou Admin)
+- Validações:
+  - Campos obrigatórios
+  - Email no formato correto
+- Envia requisição para backend via `AuthService.register()`.
+- Mostra mensagens de **sucesso** ou **erro**.
+- Após registro, redireciona para `/login`.
+
+---
+
+### 2. Login (`LoginComponent`)
+
+- Formulário com campos:
+  - **email**
+  - **password**
+- Ao enviar, chama `AuthService.login()`:
+  - Recebe token JWT e informações do usuário do backend.
+  - Armazena localmente (localStorage) e no estado global (`BehaviorSubject`).
+- Redireciona para a rota protegida principal (`/cliente/listar`).
+
+---
+
+### 3. Estado Global de Autenticação (`AuthService`)
+
+- Substitui o **Context do React**.
+- Mantém **usuário logado e token** globalmente:
+  - `currentUser$` → Observable para componentes reagirem a mudanças.
+  - `currentUserValue` → valor atual do usuário.
+- Métodos:
+  - `login(credentials)` → faz login, atualiza estado global.
+  - `register(user)` → registra usuário.
+  - `logout()` → limpa estado e redireciona para login.
+  - `isLoggedIn()` → verifica se existe usuário logado.
+- Salva token e usuário no **localStorage** para persistência entre reloads.
+
+---
+
+### 4. Proteção de Rotas (`AuthGuard`)
+
+- Implementa `CanActivate` do Angular.
+- Antes de carregar uma rota protegida:
+  - Verifica se `AuthService.isLoggedIn()` é verdadeiro.
+  - Se não estiver logado, redireciona para `/login`.
+- Usado em rotas de clientes ou páginas privadas.
+
+---
+
+### 5. Interceptor JWT (`JwtInterceptor`)
+
+- Intercepta todas as requisições HTTP do Angular.
+- Se o usuário estiver logado, adiciona cabeçalho:
+
+```http
+Authorization: Bearer <token>
